@@ -1,7 +1,0 @@
-title: LUNAR NOTE
-email: hello@example.com
-description: 一个高质感的 GitHub Pages 个人博客模板。
-baseurl: ""
-url: ""
-markdown: kramdown
-permalink: /:categories/:year/:month/:day/:title/
