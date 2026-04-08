@@ -1,177 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Anime Blog</title>
-  <style>
-    :root {
-      --ink: #1b1b1b;
-      --cream: #fff7e1;
-      --peach: #f9c5b7;
-      --sky: #8ec5ff;
-      --mint: #a7f3d0;
-      --shadow: rgba(0, 0, 0, 0.15);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
-      color: var(--ink);
-      background:
-        radial-gradient(1200px 600px at 10% 10%, #ffffff 0%, rgba(255, 255, 255, 0) 60%),
-        radial-gradient(800px 500px at 90% 15%, #ffe3ec 0%, rgba(255, 227, 236, 0) 60%),
-        linear-gradient(160deg, var(--cream), #f0f7ff 60%, #e9fff7);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    header {
-      padding: 48px 24px 24px;
-      text-align: center;
-    }
-
-    .avatar {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      border: 6px solid #fff;
-      box-shadow: 0 12px 24px var(--shadow);
-      object-fit: cover;
-      background: #fff;
-    }
-
-    .title {
-      margin: 20px 0 8px;
-      font-size: clamp(28px, 4vw, 40px);
-      letter-spacing: 1px;
-    }
-
-    .subtitle {
-      margin: 0 auto;
-      max-width: 520px;
-      font-size: 15px;
-      line-height: 1.6;
-      opacity: 0.85;
-    }
-
-    .ribbon {
-      display: inline-block;
-      margin-top: 18px;
-      padding: 6px 16px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--sky), var(--mint));
-      color: #0b3557;
-      font-weight: 600;
-      box-shadow: 0 6px 18px var(--shadow);
-    }
-
-    main {
-      flex: 1;
-      padding: 24px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 18px;
-      max-width: 980px;
-      width: 100%;
-      margin: 0 auto 36px;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 20px;
-      padding: 18px 20px;
-      box-shadow: 0 10px 30px var(--shadow);
-      border: 2px solid rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(6px);
-      animation: float-in 0.8s ease forwards;
-      opacity: 0;
-    }
-
-    .card:nth-child(2) { animation-delay: 0.1s; }
-    .card:nth-child(3) { animation-delay: 0.2s; }
-    .card:nth-child(4) { animation-delay: 0.3s; }
-
-    .card h3 {
-      margin: 0 0 8px;
-      font-size: 18px;
-    }
-
-    .card p {
-      margin: 0;
-      font-size: 14px;
-      line-height: 1.6;
-      opacity: 0.85;
-    }
-
-    footer {
-      text-align: center;
-      padding: 18px 24px 30px;
-      font-size: 12px;
-      opacity: 0.7;
-    }
-
-    @keyframes float-in {
-      from {
-        transform: translateY(16px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    @media (max-width: 600px) {
-      header {
-        padding-top: 36px;
-      }
-
-      .avatar {
-        width: 120px;
-        height: 120px;
-      }
-
-      .subtitle {
-        font-size: 14px;
-      }
-    }
-  </style>
+  <title>个人博客</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <img src="1.png" alt="Avatar" class="avatar">
-    <h1 class="title">Starry Canvas Blog</h1>
-    <p class="subtitle">A small corner for sketches, notes, and seasonal highlights. Built for GitHub Pages with a soft anime vibe.</p>
-    <div class="ribbon">New Entry: Spring Log</div>
+    <img src="1.png" alt="头像" class="avatar">
+    <h1 class="title">星绘日记</h1>
+    <p class="subtitle">记录插画、灵感和季节心情的小角落，为 GitHub Pages 准备的温柔动漫风主页。</p>
+    <div class="ribbon">最新更新：春日随笔</div>
   </header>
 
   <main>
     <section class="card">
-      <h3>About Me</h3>
-      <p>Dreaming in colors, capturing gentle stories, and collecting cozy moments.</p>
+      <h3>关于我</h3>
+      <p>喜欢用色彩记录故事，也热衷收集温柔日常。</p>
     </section>
     <section class="card">
-      <h3>Recent Post</h3>
-      <p>Cherry Blossom Trails - A calm walk through pastel streets and light rain.</p>
+      <h3>最近文章</h3>
+      <p>樱花小径：穿过粉色街道与细雨的安静散步。</p>
     </section>
     <section class="card">
-      <h3>Gallery</h3>
-      <p>Snapshots of sketches, mood boards, and tiny inspirations from daily life.</p>
+      <h3>灵感画廊</h3>
+      <p>速写、拼贴与日常灵感的轻量集锦。</p>
     </section>
     <section class="card">
-      <h3>Contact</h3>
-      <p>Say hi via social links or leave a note in the guestbook.</p>
+      <h3>联系我</h3>
+      <p>欢迎通过社交账号打招呼，或在留言板留下你的话。</p>
     </section>
   </main>
 
   <footer>
-    Powered by GitHub Pages.
+    由 GitHub Pages 驱动。
   </footer>
 </body>
 </html>
