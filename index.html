@@ -1,139 +1,177 @@
----
-layout: default
-title: 某某的笔记庭院
-description: 一个高质感的 GitHub Pages 个人博客模板。
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anime Blog</title>
+  <style>
+    :root {
+      --ink: #1b1b1b;
+      --cream: #fff7e1;
+      --peach: #f9c5b7;
+      --sky: #8ec5ff;
+      --mint: #a7f3d0;
+      --shadow: rgba(0, 0, 0, 0.15);
+    }
 
-<header class="hero">
-  <div class="profile-bar">
-    <img class="avatar" src="1.png" alt="头像" />
-    <div class="profile-text">
-      <div class="profile-name">林月</div>
-      <div class="profile-title">产品与编辑设计</div>
-    </div>
-    <div class="profile-meta">上海 · 2026</div>
-  </div>
-  <nav class="nav">
-    <div class="brand">LUNAR NOTE</div>
-    <div class="nav-links">
-      <a href="#journal">文章</a>
-      <a href="#projects">项目</a>
-      <a href="#about">关于</a>
-    </div>
-    <a class="cta" href="mailto:hello@example.com">联系我</a>
-  </nav>
-  <section class="hero-main">
-    <p class="eyebrow">GitHub Pages Blog</p>
-    <h1>
-      在微光里书写，
-      <span>以温度与克制</span>
-      记录思考。
-    </h1>
-    <p class="hero-desc">
-      我在这里分享设计、产品与技术思考。
-      这是一个极简却丰盈的数字庭院，欢迎驻足。
-    </p>
-    <div class="hero-actions">
-      <a class="primary" href="#journal">浏览最新文章</a>
-    </div>
-  </section>
-  <section class="hero-cards">
-    <article class="card glass">
-      <h3>24 / 2026</h3>
-      <p>写作实验与灵感备忘</p>
-    </article>
-    <article class="card">
-      <h3>07 / 2026</h3>
-      <p>沉静的设计语言与情绪曲线</p>
-    </article>
-    <article class="card">
-      <h3>03 / 2026</h3>
-      <p>产品策略笔记：节奏与留白</p>
-    </article>
-  </section>
-</header>
+    * {
+      box-sizing: border-box;
+    }
 
-<main>
-  <section id="journal" class="section">
-    <div class="section-head">
-      <h2>最新文章</h2>
-      <p>挑选近期的书写与洞察，保持轻盈但深入。</p>
-    </div>
-    <div class="post-grid">
-      {% for post in site.posts limit:3 %}
-      <article class="post">
-        <div class="post-meta">{{ post.date | date: "%Y.%m.%d" }} · {{ post.category }}</div>
-        <h3>{{ post.title }}</h3>
-        <p>{{ post.excerpt | strip_html | truncate: 80 }}</p>
-        <a href="{{ post.url }}">阅读全文 →</a>
-      </article>
-      {% endfor %}
-    </div>
-  </section>
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at 10% 10%, #ffffff 0%, rgba(255, 255, 255, 0) 60%),
+        radial-gradient(800px 500px at 90% 15%, #ffe3ec 0%, rgba(255, 227, 236, 0) 60%),
+        linear-gradient(160deg, var(--cream), #f0f7ff 60%, #e9fff7);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-  <section id="projects" class="section alt">
-    <div class="section-head">
-      <h2>作品与实验</h2>
-      <p>保持实验性与专业性的平衡，持续迭代个人风格。</p>
-    </div>
-    <div class="project-list">
-      <article>
-        <h3>流光字体实验室</h3>
-        <p>结合可变字体和动效的交互排版实验。</p>
-        <span>Typography · Motion</span>
-      </article>
-      <article>
-        <h3>夜航阅读计划</h3>
-        <p>每周一本书的沉浸式笔记与视觉索引。</p>
-        <span>Reading · Archive</span>
-      </article>
-      <article>
-        <h3>静水产品手册</h3>
-        <p>记录策略、路线图与落地细节的长期文档。</p>
-        <span>Product · Strategy</span>
-      </article>
-    </div>
-  </section>
+    header {
+      padding: 48px 24px 24px;
+      text-align: center;
+    }
 
-  <section id="about" class="section">
-    <div class="section-head">
-      <h2>关于我</h2>
-      <p>擅长在秩序与诗意之间搭桥。</p>
-    </div>
-    <div class="about">
-      <div class="about-card">
-        <h3>你好，我是某某</h3>
-        <p>
-          目前专注于数字产品体验、编辑型网站与品牌语言。
-          希望用文字和设计建立更长期的表达系统。
-        </p>
-        <div class="tag-row">
-          <span>品牌与产品</span>
-          <span>编辑设计</span>
-          <span>创意策略</span>
-        </div>
-      </div>
-      <div class="about-card muted">
-        <h3>写作方向</h3>
-        <ul>
-          <li>视觉系统与排版实践</li>
-          <li>数字产品的节奏与情绪</li>
-          <li>自我成长与创作方法</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+    .avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      box-shadow: 0 12px 24px var(--shadow);
+      object-fit: cover;
+      background: #fff;
+    }
 
-</main>
+    .title {
+      margin: 20px 0 8px;
+      font-size: clamp(28px, 4vw, 40px);
+      letter-spacing: 1px;
+    }
 
-<footer class="footer">
-  <div>
-    <p>© 2026 LUNAR NOTE. All rights reserved.</p>
-    <p>Powered by GitHub Pages · Crafted with restraint.</p>
-  </div>
-  <div class="social">
-    <a href="https://github.com/">GitHub</a>
-    <a href="https://x.com/">X / Twitter</a>
-    <a href="https://www.instagram.com/">Instagram</a>
-  </div>
-</footer>
+    .subtitle {
+      margin: 0 auto;
+      max-width: 520px;
+      font-size: 15px;
+      line-height: 1.6;
+      opacity: 0.85;
+    }
+
+    .ribbon {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--sky), var(--mint));
+      color: #0b3557;
+      font-weight: 600;
+      box-shadow: 0 6px 18px var(--shadow);
+    }
+
+    main {
+      flex: 1;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      max-width: 980px;
+      width: 100%;
+      margin: 0 auto 36px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 18px 20px;
+      box-shadow: 0 10px 30px var(--shadow);
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(6px);
+      animation: float-in 0.8s ease forwards;
+      opacity: 0;
+    }
+
+    .card:nth-child(2) { animation-delay: 0.1s; }
+    .card:nth-child(3) { animation-delay: 0.2s; }
+    .card:nth-child(4) { animation-delay: 0.3s; }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.6;
+      opacity: 0.85;
+    }
+
+    footer {
+      text-align: center;
+      padding: 18px 24px 30px;
+      font-size: 12px;
+      opacity: 0.7;
+    }
+
+    @keyframes float-in {
+      from {
+        transform: translateY(16px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding-top: 36px;
+      }
+
+      .avatar {
+        width: 120px;
+        height: 120px;
+      }
+
+      .subtitle {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="1.png" alt="Avatar" class="avatar">
+    <h1 class="title">Starry Canvas Blog</h1>
+    <p class="subtitle">A small corner for sketches, notes, and seasonal highlights. Built for GitHub Pages with a soft anime vibe.</p>
+    <div class="ribbon">New Entry: Spring Log</div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h3>About Me</h3>
+      <p>Dreaming in colors, capturing gentle stories, and collecting cozy moments.</p>
+    </section>
+    <section class="card">
+      <h3>Recent Post</h3>
+      <p>Cherry Blossom Trails - A calm walk through pastel streets and light rain.</p>
+    </section>
+    <section class="card">
+      <h3>Gallery</h3>
+      <p>Snapshots of sketches, mood boards, and tiny inspirations from daily life.</p>
+    </section>
+    <section class="card">
+      <h3>Contact</h3>
+      <p>Say hi via social links or leave a note in the guestbook.</p>
+    </section>
+  </main>
+
+  <footer>
+    Powered by GitHub Pages.
+  </footer>
+</body>
+</html>
