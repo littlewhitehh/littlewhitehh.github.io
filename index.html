@@ -5,75 +5,270 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>你好</title>
   <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
 </head>
 <body>
-  <header>
-    <img src="1.png" alt="头像" class="avatar">
-    <h1 class="title">hello</h1>
-    <p class="subtitle">记录课程、项目与刷题过程中的想法，分享学习路径与实践总结。</p>
-    <div class="ribbon">最新更新：没有更新</div>
-  </header>
+  <nav class="sidebar">
+    <div class="nav-header">
+      <img src="1.png" alt="头像" class="nav-avatar">
+      <h2 class="nav-title">hello</h2>
+    </div>
+    <div class="nav-menu">
+      <button class="nav-item active" data-section="about">关于我</button>
+      <button class="nav-item" data-section="articles">最近文章</button>
+      <button class="nav-item" data-section="map">学习地图</button>
+      <button class="nav-item" data-section="timeline">学习时间线</button>
+      <button class="nav-item" data-section="doing">现在在做</button>
+      <button class="nav-item" data-section="contact">联系我</button>
+      <button class="nav-item" data-section="subscribe">订阅与备忘</button>
+    </div>
+  </nav>
 
-  <main>
-    <section class="card">
-      <h3>关于我</h3>
-      <p>计算机专业学生，找实习中。。。。。</p>
-      <ul class="list">
-        <li>方向：后端开发 + 算法</li>
-        <li>常用工具：VS Code</li>
-        <li>目前在学：啥也没在学。。。</li>
-      </ul>
-    </section>
-    <section class="card">
-      <h3>最近文章</h3>
-      <p>单调栈专题：从思路到模板的整理。</p>
-      <ul class="list">
-        <li>04.06 - 动态规划常见状态设计</li>
-        <li>04.02 - Linux 常用命令速记</li>
-        <li>03.28 - 数据库索引入门</li>
-      </ul>
-    </section>
-    <section class="card">
-      <h3>学习地图</h3>
-      <p>把零散知识串成路径，方便复盘与查漏补缺。</p>
-      <p>关键词：编译原理、并发、系统设计。</p>
-    </section>
-    <section class="card">
-      <h3>联系我</h3>
-      <p>欢迎交流学习经验或项目想法。</p>
-      <ul class="list">
-        <li>邮箱：l8967772801@163.com</li>
-        <li>GitHub：littlewhitehh</li>
-        <li>知乎：@你的名字</li>
-      </ul>
-    </section>
-    <section class="card">
-      <h3>学习时间线</h3>
-      <p>阶段性整理学习成果。</p>
-      <ul class="list">
-        <li>2026.04 - 算法专题整理</li>
-        <li>2026.02 - 后端基础复盘</li>
-        <li>2025.12 - 网络协议笔记</li>
-      </ul>
-    </section>
-    <section class="card">
-      <h3>现在在做</h3>
-      <p>准备毕业论文与个人项目迭代。</p>
-      <ul class="list">
-        <li>项目：任务清单应用</li>
-        <li>题目：每日 2 题</li>
-        <li>番茄小说。。</li>
-      </ul>
-    </section>
-    <section class="card">
-      <h3>订阅与备忘</h3>
-      <p>想收到更新提醒，可收藏本页。</p>
-      <p>每周末整理学习清单。</p>
-    </section>
-  </main>
+  <div class="main-content">
+    <header class="main-header">
+      <div class="header-content">
+        <h1 class="page-title">个人学习空间</h1>
+        <p class="page-subtitle">记录课程、项目与刷题过程中的想法，分享学习路径与实践总结。</p>
+        <div class="status-badge">最新更新：没有更新</div>
+      </div>
+    </header>
+
+    <main class="content-area">
+      <section id="about" class="content-section active">
+        <div class="card">
+          <div class="card-header">
+            <h3>关于我</h3>
+            <span class="card-icon">👨‍💻</span>
+          </div>
+          <div class="card-content">
+            <p class="bio">计算机专业学生，找实习中。。。。。</p>
+            <div class="info-grid">
+              <div class="info-item">
+                <h4>方向</h4>
+                <p>后端开发 + 算法</p>
+              </div>
+              <div class="info-item">
+                <h4>常用工具</h4>
+                <p>VS Code</p>
+              </div>
+              <div class="info-item">
+                <h4>目前在学</h4>
+                <p>啥也没在学。。。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="articles" class="content-section">
+        <div class="card">
+          <div class="card-header">
+            <h3>最近文章</h3>
+            <span class="card-icon">📝</span>
+          </div>
+          <div class="card-content">
+            <p class="featured-article">单调栈专题：从思路到模板的整理。</p>
+            <div class="article-list">
+              <div class="article-item">
+                <div class="article-date">04.06</div>
+                <div class="article-info">
+                  <a href="posts/dp-states.html" class="article-link">动态规划常见状态设计</a>
+                  <span class="article-tag">算法</span>
+                </div>
+              </div>
+              <div class="article-item">
+                <div class="article-date">04.02</div>
+                <div class="article-info">
+                  <a href="posts/linux-commands.html" class="article-link">Linux 常用命令速记</a>
+                  <span class="article-tag">工具</span>
+                </div>
+              </div>
+              <div class="article-item">
+                <div class="article-date">03.28</div>
+                <div class="article-info">
+                  <a href="posts/database-index.html" class="article-link">数据库索引入门</a>
+                  <span class="article-tag">数据库</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="map" class="content-section">
+        <div class="card">
+          <div class="card-header">
+            <h3>学习地图</h3>
+            <span class="card-icon">🗺️</span>
+          </div>
+          <div class="card-content">
+            <p>把零散知识串成路径，方便复盘与查漏补缺。</p>
+            <div class="tag-cloud">
+              <span class="tag">编译原理</span>
+              <span class="tag">并发</span>
+              <span class="tag">系统设计</span>
+              <span class="tag">算法</span>
+              <span class="tag">数据结构</span>
+              <span class="tag">网络协议</span>
+            </div>
+            <div class="progress-section">
+              <div class="progress-item">
+                <span class="progress-label">前端开发</span>
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 70%"></div>
+                </div>
+              </div>
+              <div class="progress-item">
+                <span class="progress-label">后端开发</span>
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 80%"></div>
+                </div>
+              </div>
+              <div class="progress-item">
+                <span class="progress-label">算法</span>
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 60%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="timeline" class="content-section">
+        <div class="card">
+          <div class="card-header">
+            <h3>学习时间线</h3>
+            <span class="card-icon">📅</span>
+          </div>
+          <div class="card-content">
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-date">2026.04</div>
+                <div class="timeline-content">
+                  <h4>算法专题整理</h4>
+                  <p>深入理解各种算法思想，整理模板库</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">2026.02</div>
+                <div class="timeline-content">
+                  <h4>后端基础复盘</h4>
+                  <p>深入理解框架原理，优化架构设计</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">2025.12</div>
+                <div class="timeline-content">
+                  <h4>网络协议笔记</h4>
+                  <p>系统学习HTTP、TCP/IP协议栈</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="doing" class="content-section">
+        <div class="card">
+          <div class="card-header">
+            <h3>现在在做</h3>
+            <span class="card-icon">🚀</span>
+          </div>
+          <div class="card-content">
+            <p>准备毕业论文与个人项目迭代。</p>
+            <div class="project-list">
+              <div class="project-item">
+                <div class="project-status active"></div>
+                <div class="project-info">
+                  <h4>任务清单应用</h4>
+                  <p>个人项目 - 基于React的任务管理系统</p>
+                </div>
+              </div>
+              <div class="project-item">
+                <div class="project-status active"></div>
+                <div class="project-info">
+                  <h4>每日 2 题</h4>
+                  <p>刷题计划 - LeetCode每日一题</p>
+                </div>
+              </div>
+              <div class="project-item">
+                <div class="project-status planning"></div>
+                <div class="project-info">
+                  <h4>番茄小说</h4>
+                  <p>阅读应用 - 记录阅读进度</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="content-section">
+        <div class="card">
+          <div class="card-header">
+            <h3>联系我</h3>
+            <span class="card-icon">📧</span>
+          </div>
+          <div class="card-content">
+            <p>欢迎交流学习经验或项目想法。</p>
+            <div class="contact-grid">
+              <a href="mailto:l8967772801@163.com" class="contact-item">
+                <span class="contact-icon">✉️</span>
+                <span class="contact-label">邮箱</span>
+                <span class="contact-value">l8967772801@163.com</span>
+              </a>
+              <a href="https://github.com/littlewhitehh" target="_blank" class="contact-item">
+                <span class="contact-icon">💻</span>
+                <span class="contact-label">GitHub</span>
+                <span class="contact-value">littlewhitehh</span>
+              </a>
+              <a href="#" target="_blank" class="contact-item">
+                <span class="contact-icon">💬</span>
+                <span class="contact-label">知乎</span>
+                <span class="contact-value">@你的名字</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="subscribe" class="content-section">
+        <div class="card">
+          <div class="card-header">
+            <h3>订阅与备忘</h3>
+            <span class="card-icon">🔔</span>
+          </div>
+          <div class="card-content">
+            <p>想收到更新提醒，可收藏本页。</p>
+            <div class="reminder-list">
+              <div class="reminder-item">
+                <span class="reminder-icon">📌</span>
+                <div>
+                  <h4>周末学习整理</h4>
+                  <p>每周末整理学习清单，回顾本周进度</p>
+                </div>
+              </div>
+              <div class="reminder-item">
+                <span class="reminder-icon">💡</span>
+                <div>
+                  <h4>技术分享</h4>
+                  <p>定期分享学习心得和技术总结</p>
+                </div>
+              </div>
+            </div>
+            <div class="subscribe-actions">
+              <button class="btn-primary">关注更新</button>
+              <button class="btn-secondary">RSS订阅</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
 
   <footer>
-    由 GitHub Pages 驱动。
+    © 2026 hello
   </footer>
 </body>
 </html>
