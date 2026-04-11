@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>数据库索引入门</title>
+  <link rel="stylesheet" href="post.css">
+</head>
+<body>
+  <header>
+    <h1 style="margin: 0; font-size: 22px;">数据库索引入门</h1>
+    <div class="header-nav">
+      <a href="../index.html">首页</a>
+      <a href="../index.html">最近文章</a>
+    </div>
+  </header>
+
+  <main>
+    <a href="../index.html" class="back-link">← 返回首页</a>
+
+    <article>
+      <div class="article-meta">发布于 2026.03.28</div>
+
+      <h2>什么是索引</h2>
+      <p>索引是数据库中用于加速查询的数据结构，类似书的目录。没有索引，数据库需要全表扫描；有了索引，可以直接定位数据。</p>
+
+      <pre><code>-- 创建索引
+CREATE INDEX idx_user_email ON users(email);
+
+-- 查看索引
+SHOW INDEX FROM users;</code></pre>
+
+      <h2>为什么用 B+ 树</h2>
+      <p>主流数据库（MySQL、PostgreSQL）使用 B+ 树作为索引结构：</p>
+      <ul>
+        <li><strong>高度低：</strong> 3-4层即可支持千万级数据</li>
+        <li><strong>范围查询好：</strong> 叶子节点形成链表，适合范围扫描</li>
+        <li><strong>磁盘友好：</strong> 节点大小对齐磁盘块，减少IO</li>
+      </ul>
+
+      <p>对比其他结构：</p>
+      <table>
+        <tr><th>结构</th><th>优点</th><th>缺点</th><th>适用场景</th></tr>
+        <tr><td>B+树</td><td>范围查询优秀</td><td>更新稍慢</td><td>通用索引</td></tr>
+        <tr><td>哈希</td><td>精确查询极快</td><td>不支持范围</td><td>等值查询</td></tr>
+        <tr><td>位图</td><td>空间极小</td><td>不适合高基数</td><td>状态、性别等</td></tr>
+        <tr><td>全文</td><td>文本搜索</td><td>维护复杂</td><td>文章内容</td></tr>
+      </table>
+
+      <h2>索引类型</h2>
+
+      <h3>1. 主键索引（聚集索引）</h3>
+      <p>数据直接按主键顺序存储，一张表只能有一个。</p>
+      <pre><code>CREATE TABLE users (
+  id INT PRIMARY KEY,  -- 自动创建主键索引
+  name VARCHAR(50)
+);</code></pre>
+
+      <h3>2. 普通索引（非聚集索引）</h3>
+      <p>存储索引列值和主键指针，通过指针回表查完整数据。</p>
+      <pre><code>CREATE INDEX idx_name ON users(name);</code></pre>
+
+      <h3>3. 唯一索引</h3>
+      <p>索引列值必须唯一，允许一个NULL。</p>
+      <pre><code>CREATE UNIQUE INDEX idx_email ON users(email);</code></pre>
+
+      <h3>4. 联合索引</h3>
+      <p>多个列组成的索引，遵循<strong>最左前缀原则</strong>。</p>
+      <pre><code>CREATE INDEX idx_name_age ON users(name, age);
+
+-- 能用上索引
+SELECT * FROM users WHERE name = 'Tom';
+SELECT * FROM users WHERE name = 'Tom' AND age = 20;
+
+-- 不能用索引（跳过了name）
+SELECT * FROM users WHERE age = 20;</code></pre>
+
+      <h3>5. 覆盖索引</h3>
+      <p>索引已包含查询所需字段，无需回表。</p>
+      <pre><code>-- 假设有索引 idx_name_age(name, age)
+-- 这个查询可以直接从索引获取数据，无需回表
+SELECT name, age FROM users WHERE name = 'Tom';</code></pre>
+
+      <h2>什么时候用索引</h2>
+
+      <h3>适合建索引的列：</h3>
+      <ul>
+        <li>WHERE、JOIN、ORDER BY 中频繁使用的列</li>
+        <li>区分度高的列（如手机号 > 性别）</li>
+        <li>数据量大但查询少的表不需要</li>
+      </ul>
+
+      <h3>不适合建索引的列：</h3>
+      <ul>
+        <li>频繁更新的列（索引也要更新，增加写开销）</li>
+        <li>数据量小的表（全表扫描更快）</li>
+        <li>区分度低的列（如性别、状态只有两三个值）</li>
+      </ul>
+
+      <h2>索引失效场景</h2>
+
+      <pre><code>-- 1. 使用函数
+SELECT * FROM users WHERE YEAR(created_at) = 2026;
+
+-- 改为范围查询
+SELECT * FROM users WHERE created_at BETWEEN '2026-01-01' AND '2026-12-31';
+
+
+-- 2. 类型转换
+SELECT * FROM users WHERE phone = 123456;  -- phone是字符串
+-- 改为
+SELECT * FROM users WHERE phone = '123456';
+
+
+-- 3. LIKE 以 % 开头
+SELECT * FROM users WHERE name LIKE '%Tom';
+-- 改为
+SELECT * FROM users WHERE name LIKE 'Tom%';
+
+
+-- 4. OR 连接的字段没有都建索引
+SELECT * FROM users WHERE name = 'Tom' OR age = 20;
+-- 如果name有索引但age没有，索引失效
+
+
+-- 5. NOT、!=、<> 等否定操作
+SELECT * FROM users WHERE status != 1;</code></pre>
+
+      <h2>索引优化建议</h2>
+
+      <ol>
+        <li><strong>优先在 WHERE 子句的列上建索引</strong></li>
+        <li><strong>联合索引遵循最左前缀</strong>，把区分度高的放前面</li>
+        <li><strong>避免 SELECT *</strong>，只查询需要的列（利于覆盖索引）</li>
+        <li><strong>区分度低的列不单独建索引</strong>，可以联合其他列</li>
+        <li><strong>定期分析索引使用情况</strong>，删除无用索引</li>
+      </ol>
+
+      <pre><code>-- 分析SQL执行计划
+EXPLAIN SELECT * FROM users WHERE name = 'Tom';
+
+-- 查看索引使用情况（MySQL）
+SHOW STATUS LIKE 'Handler_read%';</code></pre>
+
+      <blockquote>
+        索引是把双刃剑：能大幅提升查询速度，但会增加写入开销和存储空间。要根据实际业务场景权衡，避免过度索引。
+      </blockquote>
+    </article>
+  </main>
+
+  <footer>
+    由 GitHub Pages 驱动
+  </footer>
+</body>
+</html>

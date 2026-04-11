@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>动态规划常见状态设计</title>
+  <link rel="stylesheet" href="post.css">
+</head>
+<body>
+  <header>
+    <h1 style="margin: 0; font-size: 22px;">动态规划常见状态设计</h1>
+    <div class="header-nav">
+      <a href="../index.html">首页</a>
+      <a href="../index.html">最近文章</a>
+    </div>
+  </header>
+
+  <main>
+    <a href="../index.html" class="back-link">← 返回首页</a>
+
+    <article>
+      <div class="article-meta">发布于 2026.04.06</div>
+
+      <h2>前言</h2>
+      <p>动态规划的核心在于状态定义。很多题目解不出来的原因不是想不到转移方程，而是状态定义本身就错了。本文总结常见的DP状态设计模式。</p>
+
+      <h2>一、线性DP</h2>
+      <p>最基础的DP形式，状态通常是 <code>dp[i]</code> 表示前i个元素的最优解。</p>
+
+      <h3>1.1 最长上升子序列 (LIS)</h3>
+      <p><strong>状态：</strong> <code>dp[i]</code> 表示以 <code>nums[i]</code> 结尾的最长上升子序列长度</p>
+      <p><strong>转移：</strong> <code>dp[i] = max(dp[j] + 1)</code>，其中 <code>j < i</code> 且 <code>nums[j] < nums[i]</code></p>
+
+      <pre><code>for i in range(n):
+    for j in range(i):
+        if nums[j] < nums[i]:
+            dp[i] = max(dp[i], dp[j] + 1)</code></pre>
+
+      <h3>1.2 背包问题</h3>
+      <p><strong>状态：</strong> <code>dp[i][w]</code> 表示前i个物品，容量为w时的最大价值</p>
+      <p><strong>转移：</strong></p>
+      <pre><code>dp[i][w] = max(dp[i-1][w], dp[i-1][w-weight[i]] + value[i])</code></pre>
+
+      <h2>二、区间DP</h2>
+      <p>状态涉及区间的两个端点：<code>dp[l][r]</code> 表示区间 [l, r] 的最优解。</p>
+
+      <h3>2.1 石子合并</h3>
+      <p><strong>状态：</strong> <code>dp[l][r]</code> 表示合并区间 [l, r] 的最小代价</p>
+      <p><strong>转移：</strong> 枚举分割点 k</p>
+      <pre><code>for len in range(2, n+1):
+    for l in range(n-len+1):
+        r = l + len - 1
+        for k in range(l, r):
+            dp[l][r] = min(dp[l][r], dp[l][k] + dp[k+1][r] + sum[l..r])</code></pre>
+
+      <h2>三、状态压缩DP</h2>
+      <p>当状态可以用二进制表示时，用整数作为状态。</p>
+
+      <h3>3.1 TSP 旅行商问题</h3>
+      <p><strong>状态：</strong> <code>dp[mask][i]</code> 表示访问集合为mask、当前在i的最小路径</p>
+      <p><strong>转移：</strong></p>
+      <pre><code>for mask in range(1 << n):
+    for i in range(n):
+        if mask & (1 << i):
+            for j in range(n):
+                if not (mask & (1 << j)):
+                    dp[mask | (1 << j)][j] = min(
+                        dp[mask | (1 << j)][j],
+                        dp[mask][i] + dist[i][j]
+                    )</code></pre>
+
+      <h2>四、状态机DP</h2>
+      <p>明确当前处于哪个"状态"，状态之间有转移规则。</p>
+
+      <h3>4.1 股票买卖</h3>
+      <p><strong>状态：</strong> <code>dp[i][0/1]</code> 表示第i天不持有/持有股票的最大收益</p>
+      <pre><code>dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])  # 不持有
+dp[i][1] = max(dp[i-1][1], dp[i-1][0] - prices[i])  # 持有</code></pre>
+
+      <h2>五、树形DP</h2>
+      <p>在树上进行DP，通常以节点为状态，子节点信息合并到父节点。</p>
+
+      <h3>5.1 树的最大独立集</h3>
+      <p><strong>状态：</strong> <code>dp[u][0/1]</code> 表示以u为根的子树，u不选/选时的最大独立集</p>
+      <pre><code>def dfs(u):
+    dp[u][0] = 0
+    dp[u][1] = 1
+    for v in children[u]:
+        dfs(v)
+        dp[u][0] += max(dp[v][0], dp[v][1])
+        dp[u][1] += dp[v][0]</code></pre>
+
+      <h2>总结</h2>
+      <table>
+        <tr><th>类型</th><th>状态形式</th><th>典型问题</th></tr>
+        <tr><td>线性DP</td><td>dp[i]</td><td>LIS、背包</td></tr>
+        <tr><td>区间DP</td><td>dp[l][r]</td><td>石子合并、回文</td></tr>
+        <tr><td>状态压缩</td><td>dp[mask][i]</td><td>TSP、棋盘覆盖</td></tr>
+        <tr><td>状态机</td><td>dp[i][state]</td><td>股票、自动机</td></tr>
+        <tr><td>树形DP</td><td>dp[u][state]</td><td>独立集、树直径</td></tr>
+      </table>
+
+      <blockquote>
+        状态设计没有标准答案，但好的状态设计能让转移方程清晰简单。多做题积累经验最重要。
+      </blockquote>
+    </article>
+  </main>
+
+  <footer>
+    由 GitHub Pages 驱动
+  </footer>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Linux 常用命令速记</title>
+  <link rel="stylesheet" href="post.css">
+</head>
+<body>
+  <header>
+    <h1 style="margin: 0; font-size: 22px;">Linux 常用命令速记</h1>
+    <div class="header-nav">
+      <a href="../index.html">首页</a>
+      <a href="../index.html">最近文章</a>
+    </div>
+  </header>
+
+  <main>
+    <a href="../index.html" class="back-link">← 返回首页</a>
+
+    <article>
+      <div class="article-meta">发布于 2026.04.02</div>
+
+      <h2>文件操作</h2>
+      <table>
+        <tr><th>命令</th><th>作用</th><th>示例</th></tr>
+        <tr><td><code>ls</code></td><td>列出文件</td><td><code>ls -la</code> (显示隐藏文件)</td></tr>
+        <tr><td><code>cd</code></td><td>切换目录</td><td><code>cd ~</code> (家目录)</td></tr>
+        <tr><td><code>pwd</code></td><td>显示当前路径</td><td><code>pwd</code></td></tr>
+        <tr><td><code>mkdir</code></td><td>创建目录</td><td><code>mkdir -p a/b/c</code> (递归)</td></tr>
+        <tr><td><code>rm</code></td><td>删除文件/目录</td><td><code>rm -rf dir</code> (强制递归)</td></tr>
+        <tr><td><code>cp</code></td><td>复制</td><td><code>cp -r src dst</code> (目录)</td></tr>
+        <tr><td><code>mv</code></td><td>移动/重命名</td><td><code>mv old new</code></td></tr>
+        <tr><td><code>touch</code></td><td>创建空文件</td><td><code>touch file.txt</code></td></tr>
+        <tr><td><code>find</code></td><td>查找文件</td><td><code>find . -name "*.py"</code></td></tr>
+      </table>
+
+      <h2>文件内容</h2>
+      <table>
+        <tr><th>命令</th><th>作用</th><th>示例</th></tr>
+        <tr><td><code>cat</code></td><td>显示全部内容</td><td><code>cat file.txt</code></td></tr>
+        <tr><td><code>less</code></td><td>分页查看</td><td><code>less log.txt</code> (q退出)</td></tr>
+        <tr><td><code>head</code></td><td>显示前n行</td><td><code>head -n 10 file</code></td></tr>
+        <tr><td><code>tail</code></td><td>显示后n行</td><td><code>tail -f log</code> (实时)</td></tr>
+        <tr><td><code>grep</code></td><td>搜索文本</td><td><code>grep "error" log</code></td></tr>
+        <tr><td><code>wc</code></td><td>统计行/字/字符</td><td><code>wc -l file</code></td></tr>
+        <tr><td><code>sort</code></td><td>排序</td><td><code>sort -n numbers</code></td></tr>
+        <tr><td><code>uniq</code></td><td>去重</td><td><code>sort file | uniq</code></td></tr>
+      </table>
+
+      <h2>权限管理</h2>
+      <table>
+        <tr><th>命令</th><th>作用</th><th>示例</th></tr>
+        <tr><td><code>chmod</code></td><td>修改权限</td><td><code>chmod 755 script.sh</code></td></tr>
+        <tr><td><code>chown</code></td><td>修改所有者</td><td><code>chown user:group file</code></td></tr>
+        <tr><td><code>sudo</code></td><td>以管理员执行</td><td><code>sudo apt update</code></td></tr>
+      </table>
+
+      <p><strong>权限数字：</strong> r=4, w=2, x=1</p>
+      <ul>
+        <li>755 = rwxr-xr-x (文件可执行，目录可浏览)</li>
+        <li>644 = rw-r--r-- (普通文件)</li>
+        <li>777 = rwxrwxrwx (所有人可读写执行)</li>
+      </ul>
+
+      <h2>进程管理</h2>
+      <table>
+        <tr><th>命令</th><th>作用</th><th>示例</th></tr>
+        <tr><td><code>ps</code></td><td>查看进程</td><td><code>ps aux</code></td></tr>
+        <tr><td><code>top</code></td><td>实时进程监控</td><td><code>top</code> (q退出)</td></tr>
+        <tr><td><code>kill</code></td><td>终止进程</td><td><code>kill -9 PID</code></td></tr>
+        <tr><td><code>bg/fg</code></td><td>后台/前台</td><td><code>bg %1</code></td></tr>
+        <tr><td><code>nohup</code></td><td>后台运行不挂断</td><td><code>nohup python app.py &</code></td></tr>
+      </table>
+
+      <h2>网络</h2>
+      <table>
+        <tr><th>命令</th><th>作用</th><th>示例</th></tr>
+        <tr><td><code>ping</code></td><td>测试连通性</td><td><code>ping google.com</code></td></tr>
+        <tr><td><code>curl</code></td><td>HTTP请求</td><td><code>curl -I https://example.com</code></td></tr>
+        <tr><td><code>wget</code></td><td>下载文件</td><td><code>wget url</code></td></tr>
+        <tr><td><code>ssh</code></td><td>远程登录</td><td><code>ssh user@host</code></td></tr>
+        <tr><td><code>scp</code></td><td>远程复制</td><td><code>scp file user@host:/path</code></td></tr>
+        <tr><td><code>netstat</code></td><td>网络状态</td><td><code>netstat -tlnp</code></td></tr>
+      </table>
+
+      <h2>压缩解压</h2>
+      <table>
+        <tr><th>格式</th><th>解压</th><th>压缩</th></tr>
+        <tr><td>.tar.gz</td><td><code>tar -xzf file.tar.gz</code></td><td><code>tar -czf file.tar.gz dir/</code></td></tr>
+        <tr><td>.zip</td><td><code>unzip file.zip</code></td><td><code>zip -r file.zip dir/</code></td></tr>
+        <tr><td>.tar.bz2</td><td><code>tar -xjf file.tar.bz2</code></td><td><code>tar -cjf file.tar.bz2 dir/</code></td></tr>
+      </table>
+
+      <h2>常用组合命令</h2>
+      <pre><code># 查找并删除大文件
+find . -size +100M -delete
+
+# 查找包含特定内容的文件
+grep -r "TODO" . --include="*.py"
+
+# 统计代码行数
+find . -name "*.py" | xargs wc -l
+
+# 批量重命名
+for f in *.jpg; do mv "$f" "prefix_$f"; done</code></pre>
+
+      <h2>快捷键</h2>
+      <table>
+        <tr><th>快捷键</th><th>作用</th></tr>
+        <tr><td><code>Ctrl + C</code></td><td>中断当前命令</td></tr>
+        <tr><td><code>Ctrl + Z</code></td><td>挂起当前进程</td></tr>
+        <tr><td><code>Ctrl + L</code></td><td>清屏</td></tr>
+        <tr><td><code>Ctrl + A/E</code></td><td>光标移到行首/行尾</td></tr>
+        <tr><td><code>Ctrl + U/K</code></td><td>删除光标前/后内容</td></tr>
+        <tr><td><code>!!</code></td><td>执行上一条命令</td></tr>
+        <tr><td><code>!n</code></td><td>执行历史第n条命令</td></tr>
+      </table>
+
+      <blockquote>
+        记住这些命令最有效的方法是实际使用。创建一个 .bash_aliases 文件，把常用但长的命令设置别名会更方便。
+      </blockquote>
+    </article>
+  </main>
+
+  <footer>
+    由 GitHub Pages 驱动
+  </footer>
+</body>
+</html>
